@@ -38,29 +38,24 @@ Restaurantes geram dados massivos através de múltiplos canais (presencial, iFo
 
 ---
 
-## 🚀 Stack Tecnológica
+## 🚀 Tecnologias Utilizadas
 
-### Backend
-| Tecnologia | Versão |  |
-|-----------|--------|-----------|
-| Node.js | 20+ |  |
-| Express | 4.x |  |
-| TypeScript | 5.x |  |
-| Knex.js | 3.x |  |
-| PostgreSQL | 16+ |  |
+### **Backend**
+- **[Node.js 20+](https://nodejs.org/)** - Runtime JavaScript
+- **[Express 4.x](https://expressjs.com/)** - Framework web minimalista
+- **[TypeScript 5.x](https://www.typescriptlang.org/)** - Type safety e melhor DX
+- **[Knex.js 3.x](https://knexjs.org/)** - Query builder e migrations
 
-### Frontend
-| Tecnologia | Versão |  |
-|-----------|--------|-----------|
-| Angular | 17.3 |  |
-| TypeScript | 5.x |  |
-| Bootstrap | 5.3 |  |
-| Chart.js | 4.x |  |
-| RxJS | 7.x |  |
-| SCSS | - |  |
+### **Frontend**
+- **[Angular 17.3](https://angular.io/)** - Framework SPA (Standalone Components)
+- **[TypeScript 5.x](https://www.typescriptlang.org/)** - Linguagem de programação
+- **[Bootstrap 5.3](https://getbootstrap.com/)** - Framework CSS responsivo
+- **[Chart.js 4.x](https://www.chartjs.org/)** - Gráficos e visualizações interativas
+- **[RxJS 7.x](https://rxjs.dev/)** - Programação reativa
+- **[SCSS](https://sass-lang.com/)** - Pré-processador CSS
 
-### Database
-- **PostgreSQL 16+** com:
+### **Database**
+- **[PostgreSQL 16+](https://www.postgresql.org/)** com:
   - 10 tabelas relacionais
   - 4 materialized views para analytics
   - 20+ índices estratégicos
