@@ -39,15 +39,6 @@ export interface Product {
   updated_at: Date;
 }
 
-export interface ProductOption {
-  id: string;
-  name: string;
-  type: 'add' | 'remove' | 'swap';
-  price_modifier: number;
-  created_at: Date;
-  updated_at: Date;
-}
-
 export interface Sale {
   id: string;
   store_id: string;
@@ -76,16 +67,6 @@ export interface ProductSale {
   unit_price: number;
   total_price: number;
   notes?: string;
-  created_at: Date;
-  updated_at: Date;
-}
-
-export interface ItemProductSale {
-  id: string;
-  product_sale_id: string;
-  product_option_id: string;
-  quantity: number;
-  price_modifier: number;
   created_at: Date;
   updated_at: Date;
 }
@@ -129,42 +110,3 @@ export interface DeliveryAddress {
   updated_at: Date;
 }
 
-// Analytics models
-export interface DailySalesSummary {
-  sale_day: Date;
-  store_id: string;
-  channel: SaleChannel;
-  status: SaleStatus;
-  total_sales: number;
-  total_revenue: number;
-  total_subtotal: number;
-  total_discount: number;
-  total_platform_fee: number;
-  avg_ticket: number;
-  avg_preparation_time: number;
-  avg_delivery_time: number;
-}
-
-export interface ProductPerformance {
-  product_id: string;
-  product_name: string;
-  category: string;
-  sale_day: Date;
-  store_id: string;
-  channel: SaleChannel;
-  times_sold: number;
-  total_quantity: number;
-  total_revenue: number;
-  avg_price: number;
-}
-
-export interface CustomerBehavior {
-  customer_id: string;
-  customer_name: string;
-  total_orders: number;
-  lifetime_value: number;
-  avg_order_value: number;
-  first_order_date: Date;
-  last_order_date: Date;
-  days_since_last_order: number;
-}
