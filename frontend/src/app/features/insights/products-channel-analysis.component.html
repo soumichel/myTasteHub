@@ -1,0 +1,116 @@
+<div class="products-channel-analysis">
+  <!-- Header -->
+  <div class="analysis-header">
+    <h1 class="analysis-title">🎯 Análise de Produtos por Canal</h1>
+    <p class="analysis-subtitle">Descubra qual produto vende mais em cada canal e horário</p>
+  </div>
+
+  <!-- Channel Selection -->
+  <div class="channel-selector">
+    <label class="selector-label">Selecione o canal:</label>
+    <div class="channel-buttons">
+      <button *ngFor="let channel of channels"
+              (click)="selectChannel(channel.value)"
+              [class.active]="selectedChannel === channel.value"
+              class="channel-btn">
+        {{ channel.name }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Carregando dados...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <p class="error-message">{{ error }}</p>
+  </div>
+
+  <!-- Main Content -->
+  <div *ngIf="!loading && !error" class="analysis-content">
+    <!-- Channel Stats -->
+    <div class="channel-stats">
+      <div class="stat-card">
+        <h3 class="stat-title">📦 Total de Pedidos</h3>
+        <p class="stat-value">{{ formatNumber(getTotalOrdersByChannel()) }}</p>
+      </div>
+      <div class="stat-card">
+        <h3 class="stat-title">💰 Faturamento Total</h3>
+        <p class="stat-value">{{ formatCurrency(getTotalRevenueByChannel()) }}</p>
+      </div>
+      <div class="stat-card">
+        <h3 class="stat-title">⭐ Horário de Pico</h3>
+        <p class="stat-value" *ngIf="getPeakHour() !== null">{{ getPeakHour() }}h</p>
+        <p class="stat-value" *ngIf="getPeakHour() === null">-</p>
+      </div>
+    </div>
+
+    <!-- Top Products -->
+    <div class="section top-products">
+      <h2 class="section-title">🏆 Top Produtos no {{ getChannelName(selectedChannel) }}</h2>
+      
+      <div *ngIf="topProducts.length === 0" class="empty-state">
+        <p>Nenhum produto encontrado para este canal</p>
+      </div>
+
+      <div *ngIf="topProducts.length > 0" class="products-list">
+        <div *ngFor="let product of topProducts; let i = index" class="product-item">
+          <div class="product-rank">
+            <span class="rank-number">{{ i + 1 }}</span>
+          </div>
+          <div class="product-details">
+            <h4 class="product-name">{{ product.productName }}</h4>
+          </div>
+          <div class="product-metrics">
+            <div class="metric">
+              <span class="metric-label">Vendas:</span>
+              <span class="metric-value">{{ formatNumber(product.quantity) }}</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Faturamento:</span>
+              <span class="metric-value">{{ formatCurrency(product.revenue) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hourly Performance Chart -->
+    <div class="section hourly-chart-section">
+      <h2 class="section-title">📊 Performance por Horário</h2>
+      <div class="chart-container">
+        <canvas id="hourlyChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Métricas -->
+    <div class="section insights">
+      <h2 class="section-title">💡 Métricas Interessantes</h2>
+      <div class="insights-list">
+        <div class="insight-item">
+          <span class="icon">🔥</span>
+          <span class="text">
+            O {{ getChannelName(selectedChannel) }} teve {{ formatNumber(getTotalOrdersByChannel()) }} pedidos
+            e faturou {{ formatCurrency(getTotalRevenueByChannel()) }} neste período
+          </span>
+        </div>
+        <div class="insight-item" *ngIf="getPeakHour() !== null">
+          <span class="icon">⏰</span>
+          <span class="text">
+            O horário de pico no {{ getChannelName(selectedChannel) }} é às {{ getPeakHour() }}h
+          </span>
+        </div>
+        <div class="insight-item" *ngIf="topProducts.length > 0">
+          <span class="icon">🏅</span>
+          <span class="text">
+            Produto mais vendido: <strong>{{ topProducts[0].productName }}</strong>
+            com {{ formatNumber(topProducts[0].quantity) }} vendas
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

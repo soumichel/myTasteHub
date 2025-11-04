@@ -1,0 +1,86 @@
+<div class="filters-container">
+  <div class="filters-header">
+    <h4>🔍 Filtros</h4>
+    <button class="btn-clear" (click)="clearFilters()" *ngIf="hasActiveFilters()">
+      Limpar filtros
+    </button>
+  </div>
+
+  <div class="filters-grid">
+    <!-- Date Range -->
+    <div class="filter-group">
+      <label>Período</label>
+      <div class="date-inputs">
+        <input 
+          type="date" 
+          [(ngModel)]="startDate"
+          (change)="onFilterChange()"
+          class="form-control"
+          placeholder="Data inicial">
+        <span class="date-separator">até</span>
+        <input 
+          type="date" 
+          [(ngModel)]="endDate"
+          (change)="onFilterChange()"
+          class="form-control"
+          placeholder="Data final">
+      </div>
+    </div>
+
+    <!-- Quick Date Ranges -->
+    <div class="filter-group">
+      <label>Período rápido</label>
+      <div class="quick-dates">
+        <button 
+          *ngFor="let range of quickDateRanges"
+          (click)="applyQuickDate(range.days)"
+          class="btn-quick-date"
+          [class.active]="isQuickDateActive(range.days)">
+          {{ range.label }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Stores -->
+    <div class="filter-group">
+      <label>Lojas</label>
+      <div class="checkbox-group" *ngIf="stores.length > 0">
+        <label *ngFor="let store of stores" class="checkbox-label">
+          <input 
+            type="checkbox" 
+            [value]="store.id"
+            [checked]="selectedStores.includes(store.id)"
+            (change)="toggleStore(store.id)">
+          <span>{{ store.name }}</span>
+        </label>
+      </div>
+      <div class="empty-filter-message" *ngIf="stores.length === 0">
+        <p>📭 Nenhuma loja disponível para filtro</p>
+      </div>
+    </div>
+
+    <!-- Channels -->
+    <div class="filter-group">
+      <label>Canais</label>
+      <div class="checkbox-group" *ngIf="channels.length > 0">
+        <label *ngFor="let channel of channels" class="checkbox-label">
+          <input 
+            type="checkbox" 
+            [value]="channel.value"
+            [checked]="selectedChannels.includes(channel.value)"
+            (change)="toggleChannel(channel.value)">
+          <span>{{ channel.icon }} {{ channel.label }}</span>
+        </label>
+      </div>
+      <div class="empty-filter-message" *ngIf="channels.length === 0">
+        <p>📭 Nenhum canal disponível para filtro</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="filters-actions">
+    <button class="btn btn-primary" (click)="applyFilters()">
+      Aplicar Filtros
+    </button>
+  </div>
+</div>

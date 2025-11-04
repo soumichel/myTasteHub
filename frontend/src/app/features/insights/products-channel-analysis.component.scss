@@ -1,0 +1,348 @@
+.products-channel-analysis {
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+
+  .analysis-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #e9ecef;
+
+    .analysis-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 10px 0;
+    }
+
+    .analysis-subtitle {
+      font-size: 14px;
+      color: #6c757d;
+      margin: 0;
+    }
+  }
+
+  /* Channel Selector */
+  .channel-selector {
+    margin-bottom: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    .selector-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #6c757d;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 15px;
+    }
+
+    .channel-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .channel-btn {
+      padding: 10px 16px;
+      border: 2px solid #e9ecef;
+      background: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: #495057;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: #dee2e6;
+        background-color: #f8f9fa;
+      }
+
+      &.active {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+      }
+    }
+  }
+
+  /* Loading & Error */
+  .loading-container,
+  .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    gap: 20px;
+
+    p {
+      font-size: 16px;
+      color: #495057;
+    }
+  }
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e9ecef;
+    border-top-color: #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .error-message {
+    color: #dc3545;
+    font-weight: 500;
+  }
+
+  /* Content */
+  .analysis-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  /* Channel Stats */
+  .channel-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #007bff;
+
+    .stat-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #6c757d;
+      margin: 0 0 10px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0;
+    }
+  }
+
+  /* Section */
+  .section {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 20px 0;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+  }
+
+  /* Empty State */
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6c757d;
+
+    p {
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+
+  /* Top Products */
+  .top-products {
+    .products-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .product-item {
+      display: grid;
+      grid-template-columns: 50px 1fr 1fr;
+      gap: 15px;
+      align-items: center;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border-left: 3px solid #007bff;
+
+      .product-rank {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .rank-number {
+          background: #007bff;
+          color: white;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          font-size: 16px;
+        }
+      }
+
+      .product-details {
+        .product-name {
+          font-size: 14px;
+          font-weight: 600;
+          color: #1a1a1a;
+          margin: 0;
+        }
+      }
+
+      .product-metrics {
+        display: flex;
+        gap: 20px;
+        justify-content: flex-end;
+
+        .metric {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 3px;
+
+          .metric-label {
+            font-size: 11px;
+            color: #6c757d;
+            font-weight: 500;
+          }
+
+          .metric-value {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a1a;
+          }
+        }
+      }
+    }
+  }
+
+  /* Hourly Chart */
+  .hourly-chart-section {
+    .chart-container {
+      position: relative;
+      height: 400px;
+
+      canvas {
+        max-height: 400px;
+      }
+    }
+  }
+
+  /* Insights */
+  .insights {
+    .insights-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .insight-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border-left: 4px solid #ffc107;
+
+      .icon {
+        font-size: 20px;
+        min-width: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .text {
+        font-size: 14px;
+        color: #495057;
+        line-height: 1.5;
+        flex: 1;
+
+        strong {
+          color: #1a1a1a;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .products-channel-analysis {
+    padding: 15px;
+
+    .analysis-header {
+      .analysis-title {
+        font-size: 24px;
+      }
+    }
+
+    .channel-selector {
+      .channel-buttons {
+        flex-direction: column;
+      }
+
+      .channel-btn {
+        width: 100%;
+      }
+    }
+
+    .channel-stats {
+      grid-template-columns: 1fr;
+    }
+
+    .product-item {
+      grid-template-columns: 1fr;
+      gap: 10px;
+
+      .product-rank {
+        order: -1;
+        justify-self: start;
+      }
+
+      .product-metrics {
+        grid-column: 1;
+        justify-content: flex-start;
+        gap: 20px;
+      }
+    }
+
+    .hourly-chart-section {
+      .chart-container {
+        height: 300px;
+      }
+    }
+  }
+}

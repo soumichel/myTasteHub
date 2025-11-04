@@ -1,0 +1,24 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--gray-100);
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  margin-top: 60px; /* navbar height */
+}
+
+.app-content {
+  flex: 1;
+  padding: var(--spacing-xl);
+  margin-left: 250px; /* sidebar width */
+  transition: margin-left 0.3s ease;
+  
+  @media (max-width: 768px) {
+    margin-left: 0;
+    padding: var(--spacing-md);
+  }
+}

@@ -1,0 +1,82 @@
+<div class="dashboard-container fade-in">
+  <div class="dashboard-header">
+    <h1>🏆 Dashboard</h1>
+    <p class="subtitle">Bem-vinda, Maria! Aqui está um resumo dos últimos 30 dias.</p>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-icon revenue">💰</div>
+      <div class="metric-content">
+        <span class="metric-label">Faturamento Total</span>
+        <h2 class="metric-value">{{ formatCurrency(overview?.totalRevenue || 0) }}</h2>
+        <span class="metric-change" [class.positive]="(overview?.growthRate || 0) > 0">
+          ↑ {{ Math.abs(overview?.growthRate || 0).toFixed(1) }}%
+        </span>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-icon sales">📦</div>
+      <div class="metric-content">
+        <span class="metric-label">Total de Vendas</span>
+        <h2 class="metric-value">{{ formatNumber(overview?.totalSales || 0) }}</h2>
+        <span class="metric-change neutral">{{ formatNumber(overview?.completedSales || 0) }} concluídas</span>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-icon ticket">🎫</div>
+      <div class="metric-content">
+        <span class="metric-label">Ticket Médio</span>
+        <h2 class="metric-value">{{ formatCurrency(overview?.avgTicket || 0) }}</h2>
+        <span class="metric-change neutral">Por pedido</span>
+      </div>
+    </div>
+
+    <div class="metric-card">
+      <div class="metric-icon growth">📈</div>
+      <div class="metric-content">
+        <span class="metric-label">Crescimento</span>
+        <h2 class="metric-value">{{ (overview?.growthRate || 0).toFixed(1) }}%</h2>
+        <span class="metric-change" [class.positive]="(overview?.growthRate || 0) > 0">
+          Tendência positiva
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Insights Cards -->
+  <div class="insights-row">
+    <div class="insight-card" *ngIf="topChannel">
+      <div class="insight-header">
+        <span class="insight-icon">🛵</span>
+        <h3>Canal Top</h3>
+      </div>
+      <p class="insight-value">{{ getChannelName(topChannel.channel) }}</p>
+      <p class="insight-detail">{{ formatCurrency(topChannel.revenue) }} em vendas</p>
+    </div>
+
+    <div class="insight-card" *ngIf="topProduct">
+      <div class="insight-header">
+        <span class="insight-icon">🔥</span>
+        <h3>Produto Destaque</h3>
+      </div>
+      <p class="insight-value">{{ topProduct.productName }}</p>
+      <p class="insight-detail">{{ topProduct.quantity }} unidades vendidas</p>
+    </div>
+
+    <div class="insight-card" *ngIf="overview">
+      <div class="insight-header">
+        <span class="insight-icon">✅</span>
+        <h3>Taxa de Sucesso</h3>
+      </div>
+      <p class="insight-value">{{ getSuccessRate() }}%</p>
+      <p class="insight-detail">{{ formatNumber(overview.completedSales) }} de {{ formatNumber(overview.totalSales) }} vendas</p>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading-overlay">
+    <div class="spinner-border text-primary"></div>
+  </div>
+</div>

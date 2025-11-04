@@ -1,0 +1,146 @@
+.dashboard-container {
+  max-width: 1400px;
+}
+
+.dashboard-header {
+  margin-bottom: var(--spacing-xl);
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+}
+
+.subtitle {
+  color: var(--gray-600);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xxl);
+}
+
+.metric-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  display: flex;
+  gap: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.metric-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+
+  &.revenue {
+    background-color: #FFF4ED;
+  }
+
+  &.sales {
+    background-color: #E8F5E9;
+  }
+
+  &.ticket {
+    background-color: #E3F2FD;
+  }
+
+  &.growth {
+    background-color: #F3E5F5;
+  }
+}
+
+.metric-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.metric-label {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+}
+
+.metric-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.metric-change {
+  font-size: 0.813rem;
+
+  &.positive {
+    color: var(--success);
+  }
+
+  &.neutral {
+    color: var(--gray-500);
+  }
+}
+
+.insights-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xxl);
+}
+
+.insight-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.insight-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+
+  h3 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0;
+    opacity: 0.9;
+  }
+}
+
+.insight-icon {
+  font-size: 1.5rem;
+}
+
+.insight-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-xs);
+}
+
+.insight-detail {
+  font-size: 0.813rem;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}

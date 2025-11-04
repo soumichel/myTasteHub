@@ -1,0 +1,49 @@
+<div class="insights-container fade-in">
+  <div class="insights-header">
+    <h1>💡 Feed de Insights</h1>
+    <p class="subtitle">Descobertas automáticas e recomendações baseadas em dados</p>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Carregando...</span>
+    </div>
+    <p>Analisando seus dados...</p>
+  </div>
+
+  <!-- Insights Feed -->
+  <div *ngIf="!loading" class="insights-feed">
+    <div class="insight-post" 
+         *ngFor="let insight of insights"
+         [class.alert]="insight.type === 'warning'"
+         [class.success]="insight.type === 'success'">
+      <div class="post-header">
+        <span class="post-icon">{{ insight.icon }}</span>
+        <div class="post-meta">
+          <strong>{{ insight.title }}</strong>
+          <span class="post-time">{{ insight.time }}</span>
+        </div>
+      </div>
+      <p class="post-content">{{ insight.description }}</p>
+      <div class="post-actions">
+        <button class="btn-action" (click)="markAsUseful(insight)">
+          👍 Útil
+        </button>
+        <button class="btn-action" (click)="saveInsight(insight)">
+          🔖 Salvar
+        </button>
+        <button class="btn-action" (click)="shareInsight(insight)">
+          ↗️ Compartilhar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!loading && insights.length === 0" class="empty-state">
+    <div class="empty-icon">💡</div>
+    <h3>Nenhum insight disponível</h3>
+    <p>Continue usando o sistema para gerar insights automáticos</p>
+  </div>
+</div>

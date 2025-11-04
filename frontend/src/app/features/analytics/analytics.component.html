@@ -1,0 +1,131 @@
+<div class="analytics-container fade-in">
+  <div class="analytics-header">
+    <h1>📈 Analytics</h1>
+    <p class="subtitle">Análises detalhadas e comparações de performance</p>
+  </div>
+
+  <!-- Filters -->
+  <app-analytics-filters (filtersChange)="onFiltersChange($event)"></app-analytics-filters>
+
+  <!-- Month Comparison Section -->
+  <div *ngIf="!loading" class="comparison-section">
+    <div class="chart-card full-width" *ngIf="monthComparisonData.length > 0">
+      <div class="chart-header">
+        <h3>📅 Comparação entre Meses</h3>
+        <p>Receita total por mês - Análise dos períodos com maior faturamento</p>
+      </div>
+      <div class="chart-container">
+        <canvas #monthComparisonChart></canvas>
+      </div>
+    </div>
+    <div class="chart-card full-width" *ngIf="monthComparisonData.length === 0">
+      <div class="no-data-message">
+        <div class="no-data-icon">📊</div>
+        <h3>Não há dados suficientes para comparação</h3>
+        <p>Aguarde o acúmulo de dados de múltiplos meses para visualizar esta análise comparativa</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Carregando...</span>
+    </div>
+    <p>Carregando dados...</p>
+  </div>
+
+  <!-- Charts Grid -->
+  <div *ngIf="!loading" class="charts-grid">
+    
+    <!-- Time Series Chart -->
+    <div class="chart-card full-width">
+      <div class="chart-header">
+        <div class="chart-header-content">
+          <div>
+            <h3>📊 Evolução de Vendas</h3>
+            <p>Receita e quantidade de pedidos ao longo do tempo</p>
+          </div>
+          <div class="chart-controls" *ngIf="availableMonths.length > 0">
+            <label for="monthSelect">Mês:</label>
+            <select 
+              id="monthSelect" 
+              [(ngModel)]="selectedMonth" 
+              (change)="onMonthChange()"
+              class="month-select">
+              <option value="all">Todos os meses</option>
+              <option *ngFor="let month of availableMonths" [value]="month.value">
+                {{ month.label }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="chart-container">
+        <canvas #timeSeriesChart></canvas>
+      </div>
+      <div *ngIf="timeSeriesData.length === 0 && !loading" class="no-data-message">
+        <p>📭 Não há dados disponíveis para o período selecionado</p>
+      </div>
+    </div>
+
+    <!-- Channel Performance Chart -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>🛵 Performance por Canal</h3>
+        <p>Receita líquida por canal de venda</p>
+      </div>
+      <div class="chart-container">
+        <canvas #channelsChart></canvas>
+      </div>
+    </div>
+
+    <!-- Top Products Chart -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <h3>🍔 Top 10 Produtos</h3>
+        <p>Produtos mais vendidos por receita</p>
+      </div>
+      <div class="chart-container">
+        <canvas #productsChart></canvas>
+      </div>
+    </div>
+
+    <!-- Hourly Performance Heatmap -->
+    <div class="chart-card full-width">
+      <div class="chart-header">
+        <h3>⏰ Performance por Horário</h3>
+        <p>Picos de venda por dia da semana e hora</p>
+      </div>
+      <div class="heatmap-container">
+        <div *ngIf="hourlyData.length > 0" class="heatmap-grid">
+          <div class="heatmap-labels-y">
+            <div *ngFor="let day of daysOfWeek" class="heatmap-label">{{ day }}</div>
+          </div>
+          <div class="heatmap-content">
+            <div class="heatmap-labels-x">
+              <div *ngFor="let hour of hours" class="heatmap-label">{{ hour }}h</div>
+            </div>
+            <div class="heatmap-cells">
+              <div *ngFor="let cell of heatmapData" 
+                   class="heatmap-cell"
+                   [style.background-color]="getHeatmapColor(cell.value)"
+                   [title]="getHeatmapTooltip(cell)">
+                <span class="cell-value">{{ formatNumber(cell.value) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-state">
+    <div class="error-icon">⚠️</div>
+    <h3>Erro ao carregar dados</h3>
+    <p>{{ error }}</p>
+    <button class="btn btn-primary" (click)="loadData()">Tentar Novamente</button>
+  </div>
+</div>

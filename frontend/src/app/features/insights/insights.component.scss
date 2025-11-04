@@ -1,0 +1,139 @@
+.insights-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.insights-header {
+  margin-bottom: var(--spacing-xl);
+  
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .subtitle {
+    color: var(--gray-600);
+  }
+}
+
+.loading-state, .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xxl);
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  gap: var(--spacing-md);
+
+  p {
+    color: var(--gray-600);
+    margin: 0;
+  }
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-lg);
+  opacity: 0.5;
+}
+
+.insights-feed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.insight-post {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s;
+  border-left: 4px solid var(--primary);
+  
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  &.alert {
+    border-left-color: var(--warning);
+    background-color: #FFFBF0;
+  }
+
+  &.success {
+    border-left-color: var(--success);
+    background-color: #F0FFF4;
+  }
+}
+
+.post-header {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.post-icon {
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gray-100);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Android Emoji", "EmojiSymbols", sans-serif;
+}
+
+.post-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  
+  strong {
+    color: var(--dark);
+    font-size: 1.125rem;
+  }
+  
+  .post-time {
+    color: var(--gray-500);
+    font-size: 0.875rem;
+  }
+}
+
+.post-content {
+  color: var(--gray-700);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-lg);
+}
+
+.post-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--gray-200);
+}
+
+.btn-action {
+  background: none;
+  border: none;
+  color: var(--gray-600);
+  font-size: 0.875rem;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  
+  &:hover {
+    background: var(--gray-100);
+    color: var(--primary);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

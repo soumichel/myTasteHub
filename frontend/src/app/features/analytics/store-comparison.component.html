@@ -1,0 +1,124 @@
+<div class="store-comparison">
+  <!-- Header -->
+  <div class="comparison-header">
+    <h1 class="comparison-title">🏪 Comparador de Lojas</h1>
+    <p class="comparison-subtitle">Compare performance entre suas lojas</p>
+  </div>
+
+  <!-- Store Selection -->
+  <div class="selection-container">
+    <div class="store-selector">
+      <label class="selector-label">Loja 1:</label>
+      <select [(ngModel)]="selectedStore1" (change)="compareStores()" class="store-select">
+        <option value="">Selecione uma loja</option>
+        <option *ngFor="let store of stores" [value]="store.id">{{ store.name }}</option>
+      </select>
+    </div>
+
+    <div class="vs-indicator">VS</div>
+
+    <div class="store-selector">
+      <label class="selector-label">Loja 2:</label>
+      <select [(ngModel)]="selectedStore2" (change)="compareStores()" class="store-select">
+        <option value="">Selecione uma loja</option>
+        <option *ngFor="let store of stores" [value]="store.id">{{ store.name }}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Carregando dados...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <p class="error-message">{{ error }}</p>
+  </div>
+
+  <!-- Comparison Content -->
+  <div *ngIf="comparisonData && !loading && !error" class="comparison-content">
+    <!-- Store Headers -->
+    <div class="store-headers">
+      <div class="store-header-card store1">
+        <h2 class="store-name">{{ getStoreName(selectedStore1) }}</h2>
+      </div>
+      <div class="store-header-card store2">
+        <h2 class="store-name">{{ getStoreName(selectedStore2) }}</h2>
+      </div>
+    </div>
+
+    <!-- Metrics Comparison -->
+    <div class="metrics-comparison">
+      <div *ngFor="let metric of comparisonData.metrics" class="metric-row">
+        <div class="metric-label">
+          <h3>{{ metric.name }}</h3>
+        </div>
+
+        <!-- Store 1 Value -->
+        <div class="metric-value store1" [ngClass]="'winner-' + metric.winner">
+          <div class="value">{{ metric.store1_formatted }}</div>
+          <div class="difference" *ngIf="metric.winner !== 'tie'">
+            <span *ngIf="metric.winner === 'store1'" class="badge winner">🏆 Melhor</span>
+            <span *ngIf="metric.winner === 'store2'" class="badge loser">{{ getMetricDifference(metric) }}</span>
+          </div>
+        </div>
+
+        <!-- Store 2 Value -->
+        <div class="metric-value store2" [ngClass]="'winner-' + metric.winner">
+          <div class="value">{{ metric.store2_formatted }}</div>
+          <div class="difference" *ngIf="metric.winner !== 'tie'">
+            <span *ngIf="metric.winner === 'store2'" class="badge winner">🏆 Melhor</span>
+            <span *ngIf="metric.winner === 'store1'" class="badge loser">{{ getMetricDifference(metric) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overall Winner -->
+    <div class="overall-section">
+      <h3 class="overall-title">📊 Resumo Comparativo</h3>
+      <div class="overall-cards">
+        <div class="overall-card">
+          <p class="label">{{ getStoreName(selectedStore1) }}</p>
+          <p class="wins">Vence em {{ store1WinsCount }} métrica(s)</p>
+        </div>
+        <div class="overall-card">
+          <p class="label">{{ getStoreName(selectedStore2) }}</p>
+          <p class="wins">Vence em {{ store2WinsCount }} métrica(s)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Insights -->
+    <div class="insights-section">
+      <h3 class="insights-title">💡 Métricas Interessantes</h3>
+      <div class="insights-list">
+        <div class="insight-item">
+          <span class="icon">📈</span>
+          <span class="text">
+            {{ getStoreName(selectedStore1) }} tem
+            <strong>{{ revenueDifferencePercent.toFixed(1) }}%</strong>
+            de faturamento {{ revenueDifferencePercent >= 0 ? 'a mais' : 'a menos' }} que {{ getStoreName(selectedStore2) }}
+          </span>
+        </div>
+        <div class="insight-item">
+          <span class="icon">🎯</span>
+          <span class="text">
+            O ticket médio de {{ getStoreName(ticketBetterStore) }}
+            é <strong>{{ formatCurrency(ticketDifference) }}</strong>
+            maior
+          </span>
+        </div>
+        <div class="insight-item" *ngIf="comparisonData?.store1 && comparisonData?.store2">
+          <span class="icon">📦</span>
+          <span class="text">
+            {{ getStoreName(selectedStore1) }} recebeu <strong>{{ formatNumber(comparisonData.store1!.total_orders) }}</strong>
+            pedidos vs {{ formatNumber(comparisonData.store2!.total_orders) }} de {{ getStoreName(selectedStore2) }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
