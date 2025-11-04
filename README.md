@@ -38,26 +38,26 @@ Restaurantes geram dados massivos através de múltiplos canais (presencial, iFo
 
 ---
 
-## 🚀 Stack Utilizadas
+## 🚀 Stack Tecnológica
 
 ### Backend
-| Tecnologia | Versão | 
+| Tecnologia | Versão |  |
 |-----------|--------|-----------|
-| Node.js | 20+ | 
-| Express | 4.x | 
-| TypeScript | 5.x | 
-| Knex.js | 3.x | 
-| PostgreSQL | 16+ | 
+| Node.js | 20+ |  |
+| Express | 4.x |  |
+| TypeScript | 5.x |  |
+| Knex.js | 3.x |  |
+| PostgreSQL | 16+ |  |
 
 ### Frontend
-| Tecnologia | Versão | 
+| Tecnologia | Versão |  |
 |-----------|--------|-----------|
-| Angular | 17.3 | 
-| TypeScript | 5.x | 
-| Bootstrap | 5.3 | 
-| Chart.js | 4.x | 
-| RxJS | 7.x | 
-| SCSS | - | 
+| Angular | 17.3 |  |
+| TypeScript | 5.x |  |
+| Bootstrap | 5.3 |  |
+| Chart.js | 4.x |  |
+| RxJS | 7.x |  |
+| SCSS | - |  |
 
 ### Database
 - **PostgreSQL 16+** com:
