@@ -20,7 +20,7 @@
 
 myTasteHub é uma plataforma de analytics especializada para donos de restaurantes que precisam extrair insights de seus dados operacionais sem complexidade técnica.
 
-### Problema que Resolve
+### Problemas que Resolve
 
 Restaurantes geram dados massivos através de múltiplos canais (presencial, iFood, Rappi, WhatsApp, app próprio), mas donos não conseguem:
 - ❌ Responder perguntas específicas do negócio rapidamente
@@ -41,25 +41,23 @@ Restaurantes geram dados massivos através de múltiplos canais (presencial, iFo
 ## 🚀 Stack Tecnológica
 
 ### Backend
-| Tecnologia | Versão | Propósito |
+| Tecnologia | Versão |  |
 |-----------|--------|-----------|
-| Node.js | 20+ | Runtime JavaScript |
-| Express | 4.x | Framework web minimalista |
-| TypeScript | 5.x | Type safety e melhor DX |
-| Knex.js | 3.x | Query builder e migrations |
-| PostgreSQL | 16+ | Database relacional |
-| Helmet | - | Segurança (headers) |
-| Morgan | - | Logging de requisições |
+| Node.js | 20+ |  |
+| Express | 4.x |  |
+| TypeScript | 5.x |  |
+| Knex.js | 3.x |  |
+| PostgreSQL | 16+ |  |
 
 ### Frontend
-| Tecnologia | Versão | Propósito |
+| Tecnologia | Versão |  |
 |-----------|--------|-----------|
-| Angular | 17.3 | Framework SPA (Standalone Components) |
-| TypeScript | 5.x | Type safety |
-| Bootstrap | 5.3 | UI framework |
-| Chart.js | 4.x | Gráficos e visualizações |
-| RxJS | 7.x | Programação reativa |
-| SCSS | - | Estilização avançada |
+| Angular | 17.3 |  |
+| TypeScript | 5.x |  |
+| Bootstrap | 5.3 |  |
+| Chart.js | 4.x |  |
+| RxJS | 7.x |  |
+| SCSS | - |  |
 
 ### Database
 - **PostgreSQL 16+** com:
@@ -76,17 +74,17 @@ Restaurantes geram dados massivos através de múltiplos canais (presencial, iFo
 
 ```
 ┌─────────────────────────────────────────────┐
-│         HTTP Layer (Express)                 │
+│         HTTP Layer (Express)                │
 │  Routes → Middlewares → Error Handlers      │
 └─────────────────────────────────────────────┘
                     ↓
 ┌─────────────────────────────────────────────┐
-│       Data Access Layer                      │
+│       Data Access Layer                     │
 │  Repositories (Knex.js Query Builder)       │
 └─────────────────────────────────────────────┘
                     ↓
 ┌─────────────────────────────────────────────┐
-│            PostgreSQL 16+                    │
+│            PostgreSQL 16+                   │
 │  Tables + Materialized Views + Indexes      │
 └─────────────────────────────────────────────┘
 ```
@@ -162,14 +160,17 @@ cd backend
 npm install
 
 # Configure o banco de dados PostgreSQL
-# Crie um banco chamado 'mytastehub'
+# Instruções para configurar a conexão:
+# https://github.com/lucasvieira94/nola-god-level/blob/main/QUICKSTART.md
+
+# Crie um banco chamado 'challenge_db'
 psql -U postgres
-CREATE DATABASE mytastehub;
+CREATE DATABASE challenge_db;
 \q
 
 # Configure as variáveis de ambiente
 cp .env.example .env
-# Edite .env com suas credenciais do PostgreSQL
+# Edite .env com as credenciais do PostgreSQL
 
 # Execute as migrations
 npm run migrate
@@ -330,7 +331,6 @@ CREATE INDEX idx_product_sales_sale ON product_sales(sale_id);
 
 **Materialized Views (Pré-calculadas):**
 - Atualização manual: `REFRESH MATERIALIZED VIEW daily_sales_summary;`
-- Próximo: Cron job para refresh automático
 
 **Connection Pooling:**
 ```typescript
@@ -368,73 +368,6 @@ pool: {
 **Chart.js:**
 - Canvas rendering (melhor performance que SVG)
 - Retry logic para garantir renderização
-
----
-
-## 💻 Desenvolvimento
-
-### Backend
-
-```bash
-# Desenvolvimento com hot-reload
-npm run dev
-
-# Build para produção
-npm run build
-
-# Executar migrations
-npm run migrate
-
-# Rollback última migration
-npm run migrate:rollback
-
-# Gerar dados de teste
-npm run seed
-
-# Verificar tipos TypeScript
-npm run type-check
-```
-
-### Frontend
-
-```bash
-# Servidor de desenvolvimento
-npm start
-
-# Build para produção
-npm run build
-
-# Testes unitários
-npm test
-
-# Linter
-npm run lint
-```
-
-### Endpoints da API
-
-**Analytics:**
-```
-GET /api/v1/analytics/overview
-GET /api/v1/analytics/channels
-GET /api/v1/analytics/products/top
-GET /api/v1/analytics/time-series
-GET /api/v1/analytics/hourly
-GET /api/v1/analytics/products/by-channel
-GET /api/v1/analytics/hourly/by-channel
-```
-
-**Stores:**
-```
-GET /api/v1/analytics/stores/comparison
-GET /api/v1/analytics/filters/stores
-GET /api/v1/analytics/filters/channels
-```
-
-**Health:**
-```
-GET /health
-```
 
 ---
 
@@ -504,3 +437,11 @@ O seed gera automaticamente:
 - **Distribuição realista** de horários e padrões
 
 ---
+
+## 📄 Licença
+
+Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+
+                               Projeto desenvolvido por Michel Alexandrino de Souza
